@@ -11,17 +11,17 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <Image
                 src="/logo.png"
                 alt="J&M Prestige Property Corp"
-                width={50}
-                height={50}
+                width={115}
+                height={115}
                 className="object-contain"
               />
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-[#D4AF37] tracking-wide leading-tight">J&M PRESTIGE</h1>
-                <p className="text-xs text-gray-400 tracking-wider">PROPERTY CORP</p>
+                <h1 className="text-2xl font-bold text-[#D4AF37] tracking-wide leading-tight">J&M PRESTIGE</h1>
+                <p className="text-base text-gray-400 tracking-wider">PROPERTY CORP</p>
               </div>
             </div>
             <div className="hidden md:flex items-center gap-8">
@@ -88,43 +88,34 @@ export default function Home() {
             src="/jmbackground.jpg"
             alt="Luxury Property"
             fill
-            className="object-cover opacity-40"
+            className="object-cover object-top opacity-40"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
         </div>
         
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <div className="mb-3 flex justify-center">
-            <Image
-              src="/logo.png"
-              alt="J&M Prestige Property Corp"
-              width={450}
-              height={450}
-              className="object-contain animate-fade-in"
-            />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 sm:mt-[304px]">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             <span className="text-white">Elevating</span>{" "}
             <span className="text-[#D4AF37]">Luxury</span>
             <br />
             <span className="text-white">Real Estate</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-12 max-w-3xl mx-auto font-light">
             Your premier partner in luxury property acquisition, investment, development, and management
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#services" className="px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-0">
+            <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg">
               Explore Services
             </a>
-            <a href="#contact" className="px-8 py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-lg">
+            <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg">
               Contact Us
             </a>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
           <div className="w-6 h-10 border-2 border-[#D4AF37] rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-3 bg-[#D4AF37] rounded-full animate-bounce"></div>
           </div>
@@ -294,17 +285,17 @@ export default function Home() {
       <footer className="bg-black border-t border-[#D4AF37]/20 py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <Image
                 src="/logo.png"
                 alt="J&M Prestige Property Corp"
-                width={40}
-                height={40}
+                width={100}
+                height={100}
                 className="object-contain"
               />
               <div>
-                <h3 className="font-bold text-[#D4AF37] leading-tight">J&M PRESTIGE</h3>
-                <p className="text-xs text-gray-500 tracking-wider">PROPERTY CORP</p>
+                <h3 className="font-bold text-[#D4AF37] leading-tight text-xl">J&M PRESTIGE</h3>
+                <p className="text-base text-gray-500 tracking-wider">PROPERTY CORP</p>
               </div>
             </div>
             <div className="text-center md:text-left">

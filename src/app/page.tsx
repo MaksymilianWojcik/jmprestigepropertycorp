@@ -11,18 +11,14 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center">
               <Image
                 src="/logo.png"
                 alt="J&M Prestige Property Corp"
-                width={132}
-                height={132}
+                width={172}
+                height={172}
                 className="object-contain"
               />
-              <div className="hidden sm:block">
-                <h1 className="text-2xl font-bold text-[#D4AF37] tracking-wide leading-tight">J&M PRESTIGE</h1>
-                <p className="text-base text-gray-400 tracking-wider">PROPERTY CORP</p>
-              </div>
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Services</a>
@@ -88,7 +84,7 @@ export default function Home() {
             src="/jmbackground.jpg"
             alt="Luxury Property"
             fill
-            className="object-cover object-top opacity-40"
+            className="object-cover object-top opacity-85"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
@@ -230,8 +226,8 @@ export default function Home() {
                 <Image
                   src="/logo.png"
                   alt="J&M Prestige"
-                  width={390}
-                  height={390}
+                  width={468}
+                  height={468}
                   className="object-contain opacity-80"
                 />
               </div>
@@ -258,12 +254,13 @@ export default function Home() {
             <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
               <div className="text-[#D4AF37] text-3xl mb-4">📞</div>
               <h3 className="font-semibold mb-2">Phone</h3>
-              <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
+              <p className="text-gray-400 text-sm">PH: +63 967 097 2465</p>
+              <p className="text-gray-400 text-sm">PL: +48 662 993 676</p>
             </div>
             <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
               <div className="text-[#D4AF37] text-3xl mb-4">📍</div>
               <h3 className="font-semibold mb-2">Office</h3>
-              <p className="text-gray-400 text-sm">Visit us for consultation</p>
+              <p className="text-gray-400 text-sm">Swarozyca 15A<br />71-601 Szczecin, Poland</p>
             </div>
           </div>
           <a 

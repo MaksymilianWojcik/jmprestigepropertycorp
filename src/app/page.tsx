@@ -264,7 +264,7 @@ export default function Home() {
                 Working with J&M Prestige was exceptional. Their expertise in luxury real estate and attention to detail made our property acquisition seamless and stress-free.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">
-                <p className="font-semibold text-white">Jakub Górski</p>
+                <p className="font-semibold text-white">Isandro M.</p>
               </div>
             </div>
 
@@ -275,7 +275,7 @@ export default function Home() {
                 The team's professionalism and market knowledge are unmatched. They helped us find the perfect investment property and managed the entire development process flawlessly.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">
-                <p className="font-semibold text-white">Karolina Mazur</p>
+                <p className="font-semibold text-white">Karolina M.</p>
               </div>
             </div>
 
@@ -286,7 +286,7 @@ export default function Home() {
                 Outstanding service from start to finish. J&M Prestige's property management services have exceeded our expectations, maximizing returns while minimizing hassle.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">
-                <p className="font-semibold text-white">Tomasz Lewandowski</p>
+                <p className="font-semibold text-white">Tomasz L.</p>
               </div>
             </div>
           </div>
@@ -294,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-zinc-900 to-black">
+      <section id="contact" className="py-24 px-6 bg-black border-t border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let's <span className="text-[#D4AF37]">Connect</span>
@@ -348,7 +348,7 @@ export default function Home() {
             </div>
             <div className="text-center md:text-left">
               <p className="text-gray-500 text-sm">
-                © 2026 J&M Prestige Property Corp. All rights reserved.
+                © 2023 J&M Prestige Property Corp. All rights reserved.
               </p>
             </div>
             <div className="flex gap-6">

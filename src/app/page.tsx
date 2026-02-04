@@ -306,7 +306,7 @@ export default function Home() {
             <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
               <div className="text-[#D4AF37] text-3xl mb-4">📧</div>
               <h3 className="font-semibold mb-2">Email</h3>
-              <p className="text-gray-400 text-sm">info@jmprestige.com</p>
+              <p className="text-gray-400 text-sm">jmprestigepropertycorp@gmail.com</p>
             </div>
             <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
               <div className="text-[#D4AF37] text-3xl mb-4">📞</div>
@@ -321,7 +321,7 @@ export default function Home() {
             </div>
           </div>
           <a 
-            href="mailto:info@jmprestige.com?subject=Inquiry from J%26M Prestige Website" 
+            href="mailto:jmprestigepropertycorp@gmail.com?subject=Inquiry from J%26M Prestige Website" 
             className="inline-block px-12 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg"
           >
             Send a Message

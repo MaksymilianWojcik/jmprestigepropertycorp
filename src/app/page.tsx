@@ -23,6 +23,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Services</a>
               <a href="#about" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">About</a>
+              <a href="#testimonials" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Testimonials</a>
               <a href="#contact" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
               <a href="#home" className="px-6 py-2 bg-[#D4AF37] text-black font-semibold text-sm rounded-sm hover:bg-[#F4E4B0] transition-all">
                 Get Started
@@ -59,6 +60,13 @@ export default function Home() {
             onClick={() => setMobileMenuOpen(false)}
           >
             About
+          </a>
+          <a 
+            href="#testimonials" 
+            className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Testimonials
           </a>
           <a 
             href="#contact" 
@@ -236,8 +244,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24 px-6 bg-zinc-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Client <span className="text-[#D4AF37]">Testimonials</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Hear from our satisfied clients about their experience with J&M Prestige
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+              <div className="text-[#D4AF37] text-4xl mb-4">"</div>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Working with J&M Prestige was exceptional. Their expertise in luxury real estate and attention to detail made our property acquisition seamless and stress-free.
+              </p>
+              <div className="border-t border-[#D4AF37]/20 pt-4">
+                <p className="font-semibold text-white">Jakub Górski</p>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+              <div className="text-[#D4AF37] text-4xl mb-4">"</div>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                The team's professionalism and market knowledge are unmatched. They helped us find the perfect investment property and managed the entire development process flawlessly.
+              </p>
+              <div className="border-t border-[#D4AF37]/20 pt-4">
+                <p className="font-semibold text-white">Karolina Mazur</p>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+              <div className="text-[#D4AF37] text-4xl mb-4">"</div>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Outstanding service from start to finish. J&M Prestige's property management services have exceeded our expectations, maximizing returns while minimizing hassle.
+              </p>
+              <div className="border-t border-[#D4AF37]/20 pt-4">
+                <p className="font-semibold text-white">Tomasz Lewandowski</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-black to-zinc-900">
+      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-zinc-900 to-black">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let's <span className="text-[#D4AF37]">Connect</span>

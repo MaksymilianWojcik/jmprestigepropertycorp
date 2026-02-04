@@ -15,8 +15,8 @@ export default function Home() {
               <Image
                 src="/logo.png"
                 alt="J&M Prestige Property Corp"
-                width={115}
-                height={115}
+                width={132}
+                height={132}
                 className="object-contain"
               />
               <div className="hidden sm:block">
@@ -114,12 +114,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
-          <div className="w-6 h-10 border-2 border-[#D4AF37] rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-[#D4AF37] rounded-full animate-bounce"></div>
-          </div>
-        </div>
       </section>
 
       {/* Services Section */}
@@ -236,8 +230,8 @@ export default function Home() {
                 <Image
                   src="/logo.png"
                   alt="J&M Prestige"
-                  width={300}
-                  height={300}
+                  width={390}
+                  height={390}
                   className="object-contain opacity-80"
                 />
               </div>
@@ -289,8 +283,8 @@ export default function Home() {
               <Image
                 src="/logo.png"
                 alt="J&M Prestige Property Corp"
-                width={100}
-                height={100}
+                width={115}
+                height={115}
                 className="object-contain"
               />
               <div>

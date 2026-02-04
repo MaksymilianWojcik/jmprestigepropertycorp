@@ -98,7 +98,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
         </div>
         
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 sm:mt-[304px]">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 sm:mt-[420px]">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             <span className="text-white">Elevating</span>{" "}
             <span className="text-[#D4AF37]">Luxury</span>

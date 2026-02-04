@@ -1,65 +1,334 @@
+'use client';
+
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="J&M Prestige Property Corp"
+                width={50}
+                height={50}
+                className="object-contain"
+              />
+              <div className="hidden sm:block">
+                <h1 className="text-lg font-bold text-[#D4AF37] tracking-wide leading-tight">J&M PRESTIGE</h1>
+                <p className="text-xs text-gray-400 tracking-wider">PROPERTY CORP</p>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#services" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Services</a>
+              <a href="#about" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">About</a>
+              <a href="#contact" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
+              <a href="#home" className="px-6 py-2 bg-[#D4AF37] text-black font-semibold text-sm rounded-sm hover:bg-[#F4E4B0] transition-all">
+                Get Started
+              </a>
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </nav>
+
+      {/* Mobile Menu */}
+      <div className={`fixed top-20 left-0 right-0 z-40 bg-black/95 backdrop-blur-lg border-b border-[#D4AF37]/20 md:hidden transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
+        <div className="flex flex-col gap-6 p-8">
+          <a 
+            href="#services" 
+            className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
           >
+            Services
+          </a>
+          <a 
+            href="#about" 
+            className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            About
+          </a>
+          <a 
+            href="#contact" 
+            className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Contact
+          </a>
+          <a 
+            href="#home" 
+            className="px-6 py-3 bg-[#D4AF37] text-black font-semibold text-center rounded-sm hover:bg-[#F4E4B0] transition-all"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/jmbackground.jpg"
+            alt="Luxury Property"
+            fill
+            className="object-cover opacity-40"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
+        </div>
+        
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <div className="mb-6 flex justify-center">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/logo.png"
+              alt="J&M Prestige Property Corp"
+              width={120}
+              height={120}
+              className="object-contain animate-fade-in"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] tracking-wide leading-tight">
+              J&M PRESTIGE
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 tracking-widest mt-2">PROPERTY CORP</p>
+            <p className="text-base md:text-lg text-[#D4AF37]/80 mt-4 italic font-light">
+              Your full-service luxury real estate experts
+            </p>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight mt-8">
+            <span className="text-white">Elevating</span>{" "}
+            <span className="text-[#D4AF37]">Luxury</span>
+            <br />
+            <span className="text-white">Real Estate</span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
+            Your premier partner in luxury property acquisition, investment, development, and management
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#services" className="px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg">
+              Explore Services
+            </a>
+            <a href="#contact" className="px-8 py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-lg">
+              Contact Us
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="w-6 h-10 border-2 border-[#D4AF37] rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-3 bg-[#D4AF37] rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-24 px-6 bg-gradient-to-b from-black to-zinc-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Our <span className="text-[#D4AF37]">Services</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Comprehensive real estate solutions tailored to your success
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Buy & Sell */}
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="text-[#D4AF37] text-5xl mb-6">🏡</div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Buy & Sell</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Expert guidance through every step of your property transaction. We connect buyers and sellers with precision and professionalism.
+              </p>
+              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
+                Learn More →
+              </div>
+            </div>
+
+            {/* Investments */}
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="text-[#D4AF37] text-5xl mb-6">💰</div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Investments</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Strategic investment opportunities designed to maximize returns. Build your real estate portfolio with confidence.
+              </p>
+              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
+                Learn More →
+              </div>
+            </div>
+
+            {/* Development */}
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="text-[#D4AF37] text-5xl mb-6">🏗️</div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Development</h3>
+              <p className="text-gray-400 leading-relaxed">
+                From concept to completion, we bring visionary projects to life. Creating exceptional spaces that redefine luxury living.
+              </p>
+              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
+                Learn More →
+              </div>
+            </div>
+
+            {/* Property Management */}
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="text-[#D4AF37] text-5xl mb-6">🔑</div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Property Management</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Comprehensive management services that protect and enhance your investment. Peace of mind for property owners.
+              </p>
+              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
+                Learn More →
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 px-6 bg-black">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Why Choose <span className="text-[#D4AF37]">J&M Prestige</span>
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                With years of excellence in the luxury real estate market, J&M Prestige Property Corp stands as a beacon of trust, expertise, and unparalleled service.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-[#D4AF37] text-xl">✓</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2 text-white">Expert Knowledge</h3>
+                    <p className="text-gray-400">Deep understanding of luxury property markets and investment strategies</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-[#D4AF37] text-xl">✓</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2 text-white">Personalized Service</h3>
+                    <p className="text-gray-400">Tailored solutions that align with your unique goals and vision</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-[#D4AF37] text-xl">✓</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2 text-white">Proven Track Record</h3>
+                    <p className="text-gray-400">Consistent results and satisfied clients across all service areas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-square rounded-lg bg-gradient-to-br from-[#D4AF37]/20 to-transparent border border-[#D4AF37]/30 flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="J&M Prestige"
+                  width={300}
+                  height={300}
+                  className="object-contain opacity-80"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-black to-zinc-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Let's <span className="text-[#D4AF37]">Connect</span>
+          </h2>
+          <p className="text-gray-400 text-lg mb-12">
+            Ready to elevate your real estate journey? Get in touch with our team of experts.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
+              <div className="text-[#D4AF37] text-3xl mb-4">📧</div>
+              <h3 className="font-semibold mb-2">Email</h3>
+              <p className="text-gray-400 text-sm">info@jmprestige.com</p>
+            </div>
+            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
+              <div className="text-[#D4AF37] text-3xl mb-4">📞</div>
+              <h3 className="font-semibold mb-2">Phone</h3>
+              <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
+            </div>
+            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
+              <div className="text-[#D4AF37] text-3xl mb-4">📍</div>
+              <h3 className="font-semibold mb-2">Office</h3>
+              <p className="text-gray-400 text-sm">Visit us for consultation</p>
+            </div>
+          </div>
+          <a 
+            href="mailto:info@jmprestige.com?subject=Inquiry from J%26M Prestige Website" 
+            className="inline-block px-12 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg"
           >
-            Documentation
+            Send a Message
           </a>
         </div>
-      </main>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black border-t border-[#D4AF37]/20 py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="J&M Prestige Property Corp"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <div>
+                <h3 className="font-bold text-[#D4AF37] leading-tight">J&M PRESTIGE</h3>
+                <p className="text-xs text-gray-500 tracking-wider">PROPERTY CORP</p>
+              </div>
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-gray-500 text-sm">
+                © 2026 J&M Prestige Property Corp. All rights reserved.
+              </p>
+            </div>
+            <div className="flex gap-6">
+              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Privacy</a>
+              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Terms</a>
+              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Legal</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

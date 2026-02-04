@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pt-24">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -95,30 +95,21 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <div className="mb-6 flex justify-center">
+          <div className="mb-3 flex justify-center">
             <Image
               src="/logo.png"
               alt="J&M Prestige Property Corp"
-              width={120}
-              height={120}
+              width={450}
+              height={450}
               className="object-contain animate-fade-in"
             />
           </div>
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] tracking-wide leading-tight">
-              J&M PRESTIGE
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 tracking-widest mt-2">PROPERTY CORP</p>
-            <p className="text-base md:text-lg text-[#D4AF37]/80 mt-4 italic font-light">
-              Your full-service luxury real estate experts
-            </p>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight mt-8">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="text-white">Elevating</span>{" "}
             <span className="text-[#D4AF37]">Luxury</span>
             <br />
             <span className="text-white">Real Estate</span>
-          </h2>
+          </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
             Your premier partner in luxury property acquisition, investment, development, and management
           </p>

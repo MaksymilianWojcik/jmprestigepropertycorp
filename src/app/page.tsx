@@ -86,7 +86,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-end justify-center overflow-hidden pb-36 sm:pb-48">
+      <section id="home" className="relative h-screen flex items-end justify-center overflow-hidden pb-36 sm:pb-48 scroll-mt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/jmbackground.jpg"

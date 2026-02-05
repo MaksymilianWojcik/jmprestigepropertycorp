@@ -18,6 +18,7 @@ export default function Home() {
                 width={172}
                 height={172}
                 className="object-contain"
+                priority
               />
             </div>
             <div className="hidden md:flex items-center gap-8">
@@ -87,13 +88,14 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="relative h-screen flex items-end justify-center overflow-hidden pb-36 sm:pb-48 scroll-mt-20">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-black">
           <Image
             src="/jmbackground.jpg"
             alt="Luxury Property"
             fill
             className="object-cover object-top opacity-100"
             priority
+            quality={100}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 from-0% via-transparent via-20% to-black"></div>
         </div>
@@ -228,6 +230,7 @@ export default function Home() {
                   width={468}
                   height={468}
                   className="object-contain opacity-80"
+                  priority
                 />
               </div>
             </div>
@@ -331,6 +334,7 @@ export default function Home() {
                 width={115}
                 height={115}
                 className="object-contain"
+                priority
               />
               <div>
                 <h3 className="font-bold text-[#D4AF37] leading-tight text-xl">J&M PRESTIGE</h3>

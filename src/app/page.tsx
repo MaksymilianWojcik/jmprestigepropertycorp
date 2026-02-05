@@ -125,13 +125,15 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg">
-              Explore Services
-            </a>
-            <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg">
-              Contact Us
-            </a>
+          <div className="inline-block border border-[#D4AF37]/20 rounded-lg p-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg">
+                Explore Services
+              </a>
+              <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg border-2 border-[#D4AF37]">
+                Contact Us
+              </a>
+            </div>
           </div>
         </div>
 
@@ -276,9 +278,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 flex flex-col">
               <div className="text-[#D4AF37] text-4xl mb-4">"</div>
-              <p className="text-gray-300 mb-6 leading-relaxed">
+              <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
                 Working with J&M Prestige was exceptional. Their expertise in luxury real estate and attention to detail made our property acquisition seamless and stress-free.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">
@@ -287,9 +289,9 @@ export default function Home() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 flex flex-col">
               <div className="text-[#D4AF37] text-4xl mb-4">"</div>
-              <p className="text-gray-300 mb-6 leading-relaxed">
+              <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
                 The team's professionalism and market knowledge are unmatched. They helped us find the perfect investment property and managed the entire development process flawlessly.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">
@@ -298,9 +300,9 @@ export default function Home() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300">
+            <div className="bg-black border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 flex flex-col">
               <div className="text-[#D4AF37] text-4xl mb-4">"</div>
-              <p className="text-gray-300 mb-6 leading-relaxed">
+              <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
                 Outstanding service from start to finish. J&M Prestige's property management services have exceeded our expectations, maximizing returns while minimizing hassle.
               </p>
               <div className="border-t border-[#D4AF37]/20 pt-4">

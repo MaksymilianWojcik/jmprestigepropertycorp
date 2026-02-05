@@ -151,11 +151,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Buy & Sell */}
-            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               <div className="text-[#D4AF37] text-5xl mb-6">🏡</div>
               <h3 className="text-2xl font-bold mb-4 text-white">Buy & Sell</h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed flex-grow">
                 Expert guidance through every step of your property transaction. We connect buyers and sellers with precision and professionalism.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
@@ -163,12 +163,25 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Property Management */}
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="text-[#D4AF37] text-5xl mb-6">🔑</div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Property Management</h3>
+              <p className="text-gray-400 leading-relaxed flex-grow">
+                Comprehensive management services that protect and enhance your investment. Peace of mind for property owners.
+              </p>
+              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
+                Learn More →
+              </div>
+            </div>
+
             {/* Investments */}
-            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               <div className="text-[#D4AF37] text-5xl mb-6">💰</div>
               <h3 className="text-2xl font-bold mb-4 text-white">Investments</h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed flex-grow">
                 Strategic investment opportunities designed to maximize returns. Build your real estate portfolio with confidence.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
@@ -177,25 +190,12 @@ export default function Home() {
             </div>
 
             {/* Development */}
-            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               <div className="text-[#D4AF37] text-5xl mb-6">🏗️</div>
               <h3 className="text-2xl font-bold mb-4 text-white">Development</h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed flex-grow">
                 From concept to completion, we bring visionary projects to life. Creating exceptional spaces that redefine luxury living.
-              </p>
-              <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
-              </div>
-            </div>
-
-            {/* Property Management */}
-            <div className="group relative bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-2xl hover:shadow-[#D4AF37]/20">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#B8941E] via-[#D4AF37] to-[#F4E4B0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-              <div className="text-[#D4AF37] text-5xl mb-6">🔑</div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Property Management</h3>
-              <p className="text-gray-400 leading-relaxed">
-                Comprehensive management services that protect and enhance your investment. Peace of mind for property owners.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
                 Learn More →

@@ -161,7 +161,7 @@ export default function Home() {
                 Expert guidance through every step of your property transaction. We connect buyers and sellers with precision and professionalism.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
+                View Property Listings →
               </div>
             </div>
 
@@ -174,7 +174,7 @@ export default function Home() {
                 Comprehensive management services that protect and enhance your investment. Peace of mind for property owners.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
+                Explore Management Services →
               </div>
             </div>
 
@@ -187,7 +187,7 @@ export default function Home() {
                 Strategic investment opportunities designed to maximize returns. Build your real estate portfolio with confidence.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
+                Discover Investment Opportunities →
               </div>
             </div>
 
@@ -200,7 +200,7 @@ export default function Home() {
                 From concept to completion, we bring visionary projects to life. Creating exceptional spaces that redefine luxury living.
               </p>
               <div className="mt-6 text-[#D4AF37] font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
+                View Development Projects →
               </div>
             </div>
           </div>
@@ -315,37 +315,88 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="py-12 px-6 bg-black border-t border-[#D4AF37]/20 scroll-mt-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Let's <span className="text-[#D4AF37]">Connect</span>
-          </h2>
-          <p className="text-gray-400 text-lg mb-12">
-            Ready to elevate your real estate journey? Get in touch with our team of experts.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
-              <div className="text-[#D4AF37] text-3xl mb-4">📧</div>
-              <h3 className="font-semibold mb-2">Email</h3>
-              <p className="text-gray-400 text-sm">jmprestigepropertycorp@gmail.com</p>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Let's <span className="text-[#D4AF37]">Connect</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Ready to elevate your real estate journey? Get in touch with our team of experts.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Contact Info */}
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="text-[#D4AF37] text-3xl">📧</div>
+                <div>
+                  <h3 className="font-semibold mb-2 text-lg">Email</h3>
+                  <p className="text-gray-400">jmprestigepropertycorp@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#D4AF37] text-3xl">📞</div>
+                <div>
+                  <h3 className="font-semibold mb-2 text-lg">Phone</h3>
+                  <p className="text-gray-400">PH: +63 967 097 2465</p>
+                  <p className="text-gray-400">PL: +48 662 993 676</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#D4AF37] text-3xl">📍</div>
+                <div>
+                  <h3 className="font-semibold mb-2 text-lg">Office</h3>
+                  <p className="text-gray-400">Swarozyca 15A<br />71-601 Szczecin, Poland</p>
+                </div>
+              </div>
             </div>
-            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
-              <div className="text-[#D4AF37] text-3xl mb-4">📞</div>
-              <h3 className="font-semibold mb-2">Phone</h3>
-              <p className="text-gray-400 text-sm">PH: +63 967 097 2465</p>
-              <p className="text-gray-400 text-sm">PL: +48 662 993 676</p>
-            </div>
-            <div className="p-6 bg-zinc-900 rounded-lg border border-[#D4AF37]/20">
-              <div className="text-[#D4AF37] text-3xl mb-4">📍</div>
-              <h3 className="font-semibold mb-2">Office</h3>
-              <p className="text-gray-400 text-sm">Swarozyca 15A<br />71-601 Szczecin, Poland</p>
+
+            {/* Contact Form */}
+            <div className="bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8">
+              <form action="mailto:jmprestigepropertycorp@gmail.com" method="post" encType="text/plain" className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Full Name</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">Message</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows={4}
+                    required
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors resize-none"
+                    placeholder="Tell us about your real estate needs..."
+                  ></textarea>
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
           </div>
-          <a 
-            href="mailto:jmprestigepropertycorp@gmail.com?subject=Inquiry from J%26M Prestige Website" 
-            className="inline-block px-12 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg"
-          >
-            Send a Message
-          </a>
         </div>
       </section>
 

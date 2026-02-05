@@ -86,33 +86,24 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative h-screen flex items-end justify-center overflow-hidden pb-36 sm:pb-48">
         <div className="absolute inset-0 z-0">
           <Image
             src="/jmbackground.jpg"
             alt="Luxury Property"
             fill
-            className="object-cover object-top opacity-85"
+            className="object-cover object-top opacity-100"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 from-0% via-transparent via-20% to-black"></div>
         </div>
         
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 sm:mt-[420px]">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-            <span className="text-white">Elevating</span>{" "}
-            <span className="text-[#D4AF37]">Luxury</span>
-            <br />
-            <span className="text-white">Real Estate</span>
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-12 max-w-3xl mx-auto font-light">
-            Your premier partner in luxury property acquisition, investment, development, and management
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-0">
-            <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg">
               Explore Services
             </a>
-            <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg">
+            <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg">
               Contact Us
             </a>
           </div>

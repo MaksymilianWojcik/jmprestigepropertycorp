@@ -1,10 +1,34 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            if (id) {
+              window.history.replaceState(null, '', `#${id}`);
+            }
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
   return (
     <div className="min-h-screen bg-black text-white pt-24">
       {/* Navigation */}
@@ -114,7 +138,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-6 bg-gradient-to-b from-black to-zinc-900">
+      <section id="services" className="py-12 px-6 bg-gradient-to-b from-black to-zinc-900 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -182,7 +206,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6 bg-black">
+      <section id="about" className="py-12 px-6 bg-black scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -239,7 +263,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 px-6 bg-zinc-900">
+      <section id="testimonials" className="py-12 px-6 bg-zinc-900 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -288,7 +312,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-black border-t border-[#D4AF37]/20">
+      <section id="contact" className="py-12 px-6 bg-black border-t border-[#D4AF37]/20 scroll-mt-20">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let's <span className="text-[#D4AF37]">Connect</span>

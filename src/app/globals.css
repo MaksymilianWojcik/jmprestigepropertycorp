@@ -1,11 +1,31 @@
 @import "tailwindcss";
 
+/* ===================================
+   THEME COLORS
+   Edit these to change the site's color scheme
+   =================================== */
+
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --gold: #D4AF37;
-  --gold-light: #F4E4B0;
-  --gold-dark: #B8941E;
+  /* Background Colors */
+  --background: #000000;     /* Main background (black) - used for body and main sections */
+  --foreground: #ffffff;     /* Main text color (white) - used for all primary text */
+  
+  /* Gold Colors - Brand Colors */
+  --gold: #D4AF37;          /* Primary gold - Used in:
+                               - Navigation links hover
+                               - Service card icons & CTAs
+                               - Section headings
+                               - Buttons (primary)
+                               - Borders & accents */
+                               
+  --gold-light: #F4E4B0;    /* Light gold - Used in:
+                               - Button hover states
+                               - Service card top gradient
+                               - Subtle highlights */
+                               
+  --gold-dark: #B8941E;     /* Dark gold - Used in:
+                               - Service card top gradient start
+                               - Hover state variations */
 }
 
 @theme inline {

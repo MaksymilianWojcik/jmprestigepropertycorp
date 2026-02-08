@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { siteInfo } from "./content";
+import { useState, useEffect } from "react";
+import { siteInfo, FALLBACK_IMAGE } from "./content";
 
 // Image Carousel Component
 interface ImageCarouselProps {
@@ -26,32 +26,66 @@ export function ImageCarousel({
   buttonSize = 'sm'
 }: ImageCarouselProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [validImages, setValidImages] = useState<string[]>(images);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // If images prop changes, reset validImages
+  useEffect(() => {
+    setValidImages(images.length > 0 ? images : [FALLBACK_IMAGE]);
+    setCurrentImageIndex(0);
+    setIsLoading(false);
+  }, [images]);
+
+  // Reset current index if it's out of bounds
+  useEffect(() => {
+    if (currentImageIndex >= validImages.length && validImages.length > 0) {
+      setCurrentImageIndex(0);
+    }
+  }, [validImages, currentImageIndex]);
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % validImages.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
   };
 
   const buttonSizeClass = buttonSize === 'lg' ? 'w-12 h-12 text-2xl' : 'w-10 h-10 text-xl';
-  const buttonPositionClass = buttonSize === 'lg' ? 'left-4 right-4' : 'left-2 right-2';
+
+  const handleImageError = () => {
+    // If current image fails to load, remove it and use fallback if no valid images remain
+    const currentImage = validImages[currentImageIndex];
+    const newValidImages = validImages.filter(img => img !== currentImage);
+    
+    if (newValidImages.length === 0) {
+      // No valid images left, use fallback logo
+      setValidImages([FALLBACK_IMAGE]);
+      setCurrentImageIndex(0);
+    } else {
+      // Update valid images list and adjust index if needed
+      setValidImages(newValidImages);
+      if (currentImageIndex >= newValidImages.length) {
+        setCurrentImageIndex(newValidImages.length - 1);
+      }
+    }
+  };
 
   return (
     <>
       <div className={className}>
         <Image
-          src={images[currentImageIndex]}
+          src={validImages[currentImageIndex]}
           alt={`${altPrefix} - Image ${currentImageIndex + 1}`}
           fill
           className={imageClassName}
           quality={95}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           priority
+          onError={handleImageError}
         />
         
-        {images.length > 1 && (
+        {validImages.length > 1 && (
           <>
             <button
               onClick={(e) => {
@@ -76,7 +110,7 @@ export function ImageCarousel({
             
             {showIndicators && !indicatorsOutside && (
               <div className={`absolute ${buttonSize === 'lg' ? 'bottom-6' : 'bottom-4'} left-1/2 -translate-x-1/2 flex ${buttonSize === 'lg' ? 'gap-3' : 'gap-2'}`}>
-                {images.map((_, index) => (
+                {validImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={(e) => {
@@ -98,9 +132,9 @@ export function ImageCarousel({
       </div>
       
       {/* External indicators (below image) */}
-      {showIndicators && indicatorsOutside && images.length > 1 && (
+      {showIndicators && indicatorsOutside && validImages.length > 1 && (
         <div className="flex justify-center gap-3 mt-4">
-          {images.map((_, index) => (
+          {validImages.map((_, index) => (
             <button
               key={index}
               onClick={(e) => {

@@ -1,5 +1,8 @@
 // Website Content - Edit this file to update text throughout the site
 
+// Fallback image if no property images are available
+export const FALLBACK_IMAGE = "/logo.png";
+
 // Utility function to get property image paths
 export function getPropertyImagePath(slug: string, imageName: string): string {
   return `/properties/${slug}/${imageName}`;

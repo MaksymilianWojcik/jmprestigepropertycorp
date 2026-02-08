@@ -9,7 +9,19 @@ export function getPropertyImagePath(slug: string, imageName: string): string {
 }
 
 // Utility function to get all property images with full paths
-export function getPropertyImages(property: { slug: string; images: string[] }): string[] {
+// If showImages is false, return fallback logo instead
+export function getPropertyImages(property: { slug: string; images: string[]; showImages?: boolean }): string[] {
+  // If showImages is explicitly set to false, return fallback
+  if (property.showImages === false) {
+    return [FALLBACK_IMAGE];
+  }
+  
+  // If property has no images or empty array, return fallback
+  if (!property.images || property.images.length === 0) {
+    return [FALLBACK_IMAGE];
+  }
+  
+  // Otherwise return the property images
   return property.images.map(img => getPropertyImagePath(property.slug, img));
 }
 
@@ -120,6 +132,7 @@ export const properties = [
     // Images: Store in /public/properties/{slug}/
     // Just provide filenames here, path is auto-generated
     images: ["image-1.jpg", "image-2.jpg", "image-3.jpg"],
+    showImages: false, // Set to false to always show logo instead of property images
     available: true,
     published: false, // Set to false to hide from listings
     featured: false, // Set to true to show in homepage Featured section
@@ -174,6 +187,7 @@ export const properties = [
     ],
     // Images: Store in /public/properties/{slug}/
     images: ["op_tb15n1.jpeg", "op_tb15n2.jpeg", "op_tb15n3.jpeg", "op_tb15n4.jpeg", "op_tb15n5.jpeg", "op_tb16n7.jpeg"],
+    showImages: false, // Set to false to always show logo instead of property images
     available: true,
     published: true, // Set to false to hide from listings
     featured: true, // Set to true to show in homepage Featured section
@@ -230,6 +244,7 @@ export const properties = [
       }
     ],
     images: ["image-1.jpg"], // Placeholder - replace with actual villa images
+    showImages: false, // Set to false to always show logo instead of property images
     available: true,
     published: false, // Set to false to hide from listings
     featured: false, // Set to true to show in homepage Featured section
@@ -302,6 +317,7 @@ export const properties = [
       }
     ],
     images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg"], // Replace with actual property photos
+    showImages: false, // Set to false to always show logo instead of property images
     available: true,
     published: true, // Set to false to hide from listings
     featured: true, // Set to true to show in homepage Featured section
@@ -364,6 +380,7 @@ export const properties = [
       }
     ],
     images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"], // Replace with actual photos
+    showImages: true, // Set to false to always show logo instead of property images
     available: true,
     published: true,
     featured: false,
@@ -426,6 +443,7 @@ export const properties = [
       }
     ],
     images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"], // Replace with actual photos
+    showImages: true, // Set to false to always show logo instead of property images
     available: true,
     published: true,
     featured: false,
@@ -492,6 +510,7 @@ export const properties = [
       }
     ],
     images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg"], // Replace with actual photos
+    showImages: false, // Set to false to always show logo instead of property images
     available: true,
     published: true,
     featured: false,

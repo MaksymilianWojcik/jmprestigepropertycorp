@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { properties, getPropertyImages } from "../content";
 import { PropertyCard, SimpleFooter } from "../components";
 
-export default function PropertiesPage() {
+function PropertiesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -132,5 +132,17 @@ export default function PropertiesPage() {
       {/* Footer */}
       <SimpleFooter />
     </div>
+  );
+}
+
+export default function PropertiesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white pt-24 flex items-center justify-center">
+        <div className="text-gray-400">Loading properties...</div>
+      </div>
+    }>
+      <PropertiesContent />
+    </Suspense>
   );
 }

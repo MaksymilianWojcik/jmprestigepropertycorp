@@ -1,13 +1,13 @@
 'use client';
 
-import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { properties, getPropertyImages } from "../content";
-import { PropertyCard, SimpleFooter } from "../components";
+import { useTranslations } from 'next-intl';
+import { properties, getPropertyImages } from "../../content";
+import { PropertyCard, NavigationBar, SimpleFooter } from "../../components";
 
 function PropertiesContent() {
+  const t = useTranslations();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -36,50 +36,25 @@ function PropertiesContent() {
   ).filter(p => p.published !== false); // Only show published properties
 
   const categories = [
-    { id: "all", label: "All Properties" },
-    { id: "short-term-rental", label: "Short-Term Rentals" },
-    { id: "for-sale", label: "For Sale" },
+    { id: "all", label: t('properties.all') },
+    { id: "short-term-rental", label: t('properties.shortTermRental') },
+    { id: "for-sale", label: t('properties.forSaleCategory') },
   ];
 
   return (
     <div className="min-h-screen bg-black text-white pt-24">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20 py-2">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-6">
-              <button
-                onClick={() => router.back()}
-                className="flex items-center gap-2 px-4 py-2 text-[#D4AF37] hover:text-[#F4E4B0] transition-colors cursor-pointer"
-                aria-label="Go back"
-              >
-                <span className="text-xl">←</span>
-                <span className="hidden sm:inline text-sm font-medium">Back</span>
-              </button>
-              <Link href="/" className="flex items-center">
-                <Image
-                  src="/logo.png"
-                  alt="J&M Prestige Property Corp"
-                  width={115}
-                  height={115}
-                  className="object-contain"
-                  priority
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <NavigationBar />
 
       {/* Properties Listing */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Our <span className="text-[#D4AF37]">Properties</span>
+              {t('properties.allProperties').split(' ')[0]} <span className="text-[#D4AF37]">{t('properties.allProperties').split(' ').slice(1).join(' ')}</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Browse our exclusive collection of luxury properties
+              {t('properties.subheading')}
             </p>
           </div>
 
@@ -103,7 +78,7 @@ function PropertiesContent() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProperties.map((property) => (
               <PropertyCard
-                key={property.id}
+                key={`${property.id}-${selectedCategory}`}
                 slug={property.slug}
                 name={property.name}
                 location={property.location}
@@ -123,7 +98,7 @@ function PropertiesContent() {
 
           {filteredProperties.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">No properties available in this category. Check back soon!</p>
+              <p className="text-gray-400 text-lg">{t('properties.noProperties')}</p>
             </div>
           )}
         </div>

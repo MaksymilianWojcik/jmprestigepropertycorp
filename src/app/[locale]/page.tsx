@@ -3,11 +3,56 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { siteInfo, heroSection, services, aboutSection, testimonials, contactSection, properties, getPropertyImages } from "./content";
-import { ServiceCard, TestimonialCard, FeatureItem, ContactInfoItem, PropertyCard } from "./components";
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { useTranslations } from 'next-intl';
+import { siteInfo, heroSection, services, aboutSection, testimonials, contactSection, properties, getPropertyImages } from "../content";
+import { ServiceCard, TestimonialCard, FeatureItem, ContactInfoItem, PropertyCard } from "../components";
+import { LanguageSwitcher } from "../LanguageSwitcher";
 
 export default function Home() {
+  const t = useTranslations();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formMessage, setFormMessage] = useState('');
+  const [defaultMessage, setDefaultMessage] = useState('');
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+    setFormMessage('');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(contactSection.formspreeEndpoint, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormMessage(t('contact.form.successMessage'));
+        form.reset();
+        setDefaultMessage('');
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus('idle');
+          setFormMessage('');
+        }, 5000);
+      } else {
+        setFormStatus('error');
+        setFormMessage(t('contact.form.errorMessage'));
+      }
+    } catch (error) {
+      setFormStatus('error');
+      setFormMessage(t('contact.form.errorMessage'));
+    }
+  };
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
@@ -39,6 +84,28 @@ export default function Home() {
     const shouldScrollToContact = sessionStorage.getItem('scrollToContact');
     if (shouldScrollToContact === 'true') {
       sessionStorage.removeItem('scrollToContact');
+      
+      // Check for property inquiry information
+      const propertyInquiryData = sessionStorage.getItem('propertyInquiry');
+      if (propertyInquiryData) {
+        try {
+          const inquiry = JSON.parse(propertyInquiryData);
+          const { propertyName, type } = inquiry;
+          
+          // Set the default message based on inquiry type
+          if (type === 'booking') {
+            setDefaultMessage(contactSection.messageTemplates.booking(propertyName));
+          } else if (type === 'information') {
+            setDefaultMessage(contactSection.messageTemplates.information(propertyName));
+          }
+          
+          sessionStorage.removeItem('propertyInquiry');
+        } catch (e) {
+          // Invalid JSON, just ignore and clear
+          sessionStorage.removeItem('propertyInquiry');
+        }
+      }
+      
       setTimeout(() => {
         const contactSection = document.getElementById('contact');
         if (contactSection) {
@@ -91,13 +158,13 @@ export default function Home() {
               />
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Services</a>
-              <a href="#properties" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Properties</a>
-              <a href="#about" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">About</a>
-              <a href="#testimonials" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Testimonials</a>
-              <a href="#contact" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
+              <a href="#services" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">{t('nav.services')}</a>
+              <a href="#properties" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">{t('nav.properties')}</a>
+              <a href="#about" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">{t('nav.about')}</a>
+              <a href="#testimonials" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">{t('nav.testimonials')}</a>
+              <a href="#contact" className="text-sm font-medium hover:text-[#D4AF37] transition-colors">{t('nav.contact')}</a>
               <a href="#home" className="px-6 py-2 bg-[#D4AF37] text-black font-semibold text-sm rounded-sm hover:bg-[#F4E4B0] transition-all">
-                Get Started
+                {t('nav.getStarted')}
               </a>
             </div>
             
@@ -123,42 +190,42 @@ export default function Home() {
             className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Services
+            {t('nav.services')}
           </a>
           <a 
             href="#properties" 
             className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Properties
+            {t('nav.properties')}
           </a>
           <a 
             href="#about" 
             className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            About
+            {t('nav.about')}
           </a>
           <a 
             href="#testimonials" 
             className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Testimonials
+            {t('nav.testimonials')}
           </a>
           <a 
             href="#contact" 
             className="text-lg font-medium hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Contact
+            {t('nav.contact')}
           </a>
           <a 
             href="#home" 
             className="px-6 py-3 bg-[#D4AF37] text-black font-semibold text-center rounded-sm hover:bg-[#F4E4B0] transition-all"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Get Started
+            {t('nav.getStarted')}
           </a>
         </div>
       </div>
@@ -179,19 +246,27 @@ export default function Home() {
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <div className="inline-block border border-[#D4AF37]/20 rounded-lg p-4">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-3">
               <a 
                 href={heroSection.ctaButtons[0].href} 
                 className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all text-base sm:text-lg"
               >
-                {heroSection.ctaButtons[0].text}
+                {t('hero.exploreServices')}
               </a>
               <a 
                 href={heroSection.ctaButtons[1].href} 
                 className="px-6 py-3 sm:px-8 sm:py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-base sm:text-lg border-2 border-[#D4AF37]"
               >
-                {heroSection.ctaButtons[1].text}
+                {t('hero.contactUs')}
               </a>
+            </div>
+            <div className="flex justify-center">
+              <Link
+                href="/properties"
+                className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-[#D4AF37]/50 text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37]/10 hover:border-[#D4AF37] transition-all text-base sm:text-lg"
+              >
+                {t('hero.viewAllProperties')} →
+              </Link>
             </div>
           </div>
         </div>
@@ -203,10 +278,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Our <span className="text-[#D4AF37]">Services</span>
+              {t('services.heading').split(' ')[0]} <span className="text-[#D4AF37]">{t('services.heading').split(' ')[1]}</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Comprehensive real estate solutions tailored to your success
+              {t('services.subheading')}
             </p>
           </div>
 
@@ -230,10 +305,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Featured <span className="text-[#D4AF37]">Properties</span>
+              {t('properties.heading').split(' ')[0]} <span className="text-[#D4AF37]">{t('properties.heading').split(' ')[1]}</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Discover our handpicked selection of premium properties for rent and sale
+              {t('properties.subheading')}
             </p>
           </div>
 
@@ -266,7 +341,7 @@ export default function Home() {
               href="/properties"
               className="inline-block px-8 py-3 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all"
             >
-              View All Properties →
+              {t('properties.viewAllProperties')} →
             </Link>
           </div>
         </div>
@@ -315,10 +390,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Client <span className="text-[#D4AF37]">Testimonials</span>
+              {t('testimonials.heading').split(' ')[0]} <span className="text-[#D4AF37]">{t('testimonials.heading').split(' ')[1]}</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Hear from our satisfied clients about their experience with J&M Prestige
+              {t('testimonials.subheading')}
             </p>
           </div>
 
@@ -339,77 +414,167 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {contactSection.heading.split(' ')[0]} <span className="text-[#D4AF37]">{contactSection.heading.split(' ')[1]}</span>
+              {t('contact.heading').split(' ')[0]} <span className="text-[#D4AF37]">{t('contact.heading').split(' ')[1]}</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              {contactSection.description}
+              {t('contact.subheading')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div className="space-y-8">
-              <ContactInfoItem icon="📧" title="Email">
+              <ContactInfoItem icon="📧" title={t('contact.email')}>
                 <p>{siteInfo.email}</p>
               </ContactInfoItem>
               
-              <ContactInfoItem icon="📞" title="Phone">
-                <p>PH: {siteInfo.phones.philippines}</p>
-                <p>PL: {siteInfo.phones.poland}</p>
+              <ContactInfoItem icon="📞" title={t('contact.phone')}>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span>PH: {siteInfo.phones.philippines}</span>
+                    <a
+                      href={`https://wa.me/${siteInfo.phones.philippines.replace(/[\s\+\-\(\)]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2 py-1 bg-green-500/10 border border-green-500/30 rounded-sm text-green-400 hover:bg-green-500 hover:text-white transition-all text-xs"
+                      title="Chat on WhatsApp"
+                    >
+                      <FaWhatsapp size={14} />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span>PL: {siteInfo.phones.poland}</span>
+                    <a
+                      href={`https://wa.me/${siteInfo.phones.poland.replace(/[\s\+\-\(\)]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2 py-1 bg-green-500/10 border border-green-500/30 rounded-sm text-green-400 hover:bg-green-500 hover:text-white transition-all text-xs"
+                      title="Chat on WhatsApp"
+                    >
+                      <FaWhatsapp size={14} />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
               </ContactInfoItem>
               
-              <ContactInfoItem icon="📍" title="Office">
+              <ContactInfoItem icon="📍" title={t('contact.office')}>
                 <p>{siteInfo.address.street}<br />{siteInfo.address.city}</p>
+              </ContactInfoItem>
+              
+              <ContactInfoItem icon="🌐" title={t('contact.followUs')}>
+                <div className="flex gap-3">
+                  <a 
+                    href={siteInfo.socialMedia.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                    aria-label="Facebook"
+                  >
+                    <FaFacebook size={20} />
+                  </a>
+                  <a 
+                    href={siteInfo.socialMedia.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram size={20} />
+                  </a>
+                  <a 
+                    href={siteInfo.socialMedia.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                    aria-label="TikTok"
+                  >
+                    <FaTiktok size={20} />
+                  </a>
+                </div>
               </ContactInfoItem>
             </div>
 
             {/* Contact Form */}
             <div className="bg-zinc-900 border border-[#D4AF37]/20 rounded-lg p-8">
-              <form action={`mailto:${siteInfo.email}`} method="post" encType="text/plain" className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
-                    {contactSection.formLabels.name}
+                    {t('contact.form.name')}
                   </label>
                   <input 
                     type="text" 
                     id="name" 
                     name="name" 
                     required
-                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
-                    placeholder={contactSection.placeholders.name}
+                    disabled={formStatus === 'submitting'}
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
-                    {contactSection.formLabels.email}
+                    {t('contact.form.email')}
                   </label>
                   <input 
                     type="email" 
                     id="email" 
                     name="email" 
                     required
-                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
-                    placeholder={contactSection.placeholders.email}
+                    disabled={formStatus === 'submitting'}
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder={t('contact.form.emailPlaceholder')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2 text-gray-300">
+                    {t('contact.form.phone')}
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    required
+                    disabled={formStatus === 'submitting'}
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
-                    {contactSection.formLabels.message}
+                    {t('contact.form.message')}
                   </label>
                   <textarea 
+                    key={defaultMessage}
                     id="message" 
                     name="message" 
                     rows={4}
                     required
-                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors resize-none"
-                    placeholder={contactSection.placeholders.message}
+                    disabled={formStatus === 'submitting'}
+                    defaultValue={defaultMessage}
+                    className="w-full px-4 py-3 bg-black border border-[#D4AF37]/20 rounded-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder={t('contact.form.messagePlaceholder')}
                   ></textarea>
                 </div>
+                
+                {/* Status Messages */}
+                {formMessage && (
+                  <div className={`p-4 rounded-sm ${
+                    formStatus === 'success' 
+                      ? 'bg-green-500/20 border border-green-500/50 text-green-400' 
+                      : 'bg-red-500/20 border border-red-500/50 text-red-400'
+                  }`}>
+                    {formMessage}
+                  </div>
+                )}
+                
                 <button 
                   type="submit"
-                  className="w-full px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg"
+                  disabled={formStatus === 'submitting'}
+                  className="w-full px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {contactSection.formLabels.submit}
+                  {formStatus === 'submitting' ? t('contact.form.sending') : t('contact.form.submit')}
                 </button>
               </form>
             </div>
@@ -420,7 +585,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-black border-t border-[#D4AF37]/20 py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
             <div className="flex items-center gap-4">
               <Image
                 src="/logo.png"
@@ -437,14 +602,46 @@ export default function Home() {
             </div>
             <div className="text-center md:text-left">
               <p className="text-gray-500 text-sm">
-                © {siteInfo.foundedYear} {siteInfo.companyName} {siteInfo.companySubtitle}. All rights reserved.
+                © {siteInfo.foundedYear} {siteInfo.companyName} {siteInfo.companySubtitle}. {t('footer.allRightsReserved')}.
               </p>
             </div>
-            <div className="flex gap-6">
-              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Privacy</a>
-              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Terms</a>
-              <a href="#" className="text-gray-500 hover:text-[#D4AF37] transition-colors">Legal</a>
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-gray-400 text-sm font-semibold">{t('footer.followUs')}</p>
+              <div className="flex gap-4">
+                <a 
+                  href={siteInfo.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                  aria-label="Facebook"
+                >
+                  <FaFacebook size={20} />
+                </a>
+                <a 
+                  href={siteInfo.socialMedia.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram size={20} />
+                </a>
+                <a 
+                  href={siteInfo.socialMedia.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+                  aria-label="TikTok"
+                >
+                  <FaTiktok size={20} />
+                </a>
+              </div>
             </div>
+          </div>
+          
+          {/* Language Switcher */}
+          <div className="border-t border-[#D4AF37]/20 pt-6 flex justify-center">
+            <LanguageSwitcher />
           </div>
         </div>
       </footer>

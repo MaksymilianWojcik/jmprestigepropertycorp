@@ -109,7 +109,96 @@ export const aboutSection = {
 
 ---
 
-### 6. Contact Form
+### 6. Properties (Rentals & Sales)
+
+Each property has many fields. The most important one is the **`slug`**.
+
+#### ⚠️ Understanding the `slug` Field
+
+The `slug` is like a property's ID card - it's used for 3 things:
+
+1. **Website URL**: Creates the property page address
+   - Example: `slug: "hayat-sky-tower-sale"` → Website shows at `/properties/hayat-sky-tower-sale`
+
+2. **Image Folder**: Tells where to find property photos
+   - The system looks for photos in `/public/properties/{slug}/`
+   - Example: `slug: "hayat-sky-tower-sale"` → Photos go in `/public/properties/hayat-sky-tower-sale/`
+
+3. **Property Finder**: Helps the system load the correct property when someone clicks on it
+
+#### Slug Rules:
+- Must be unique (no two properties can use the same slug)
+- Use lowercase letters and hyphens (not spaces)
+- Example: `"modern-apartment-cebu"` ✅
+- Not: `"Modern Apartment Cebu"` ❌ (has spaces and capitals)
+
+#### Property Example:
+
+```typescript
+{
+  id: 5,                                    // Unique number
+  slug: "hayat-sky-tower-sale",            // ⚠️ MATCHES folder name below!
+  name: "Hayat Sky Tower Studio - For Sale", // Display name
+  location: "Cebu City, Philippines",
+  category: "for-sale",                    // or "short-term-rental"
+  price: "₱3,200,000",
+  priceUnit: "",                           // Empty for sale, "per night" for rent
+  description: "Short description...",
+  features: ["Furnished", "Balcony"],
+  images: ["1.jpg", "2.jpg", "3.jpg"],    // Just filenames!
+  showImages: true,                        // false = show logo, true = show photos
+  published: true,                         // false = hide, true = show
+  featured: false,                         // true = show on homepage
+}
+```
+
+#### How Images Work:
+
+**Folder structure:**
+```
+public/
+  properties/
+    hayat-sky-tower-sale/        ← Folder name MUST match slug!
+      1.jpg
+      2.jpg
+      3.jpg
+```
+
+**In content.ts:**
+```typescript
+slug: "hayat-sky-tower-sale",    // Must match folder name
+images: ["1.jpg", "2.jpg"],      // Just the filenames
+showImages: true,                // Show the photos (not logo)
+```
+
+**The system automatically creates the full path:**
+- From: `images: ["1.jpg"]`
+- To: `/properties/hayat-sky-tower-sale/1.jpg`
+
+#### Key Fields Explained:
+
+- **`slug`** - URL and folder name (must match!)
+- **`name`** - What users see as the property title
+- **`category`** - Either `"short-term-rental"` or `"for-sale"`
+- **`showImages`** - `true` shows photos, `false` shows logo
+- **`published`** - `true` makes it visible, `false` hides it
+- **`featured`** - `true` shows on homepage (max 2 properties)
+- **`available`** - For rentals: `true` = available, `false` = booked
+
+#### To Add a New Property:
+
+1. **Choose a slug** (e.g., `"modern-studio-cebu"`)
+2. **Create folder**: `/public/properties/modern-studio-cebu/`
+3. **Add photos** to that folder (name them 1.jpg, 2.jpg, etc.)
+4. **Copy** an existing property in `content.ts`
+5. **Update all fields** (especially `slug`, `name`, `price`)
+6. **Set** `images: ["1.jpg", "2.jpg"]` (just filenames)
+7. **Set** `showImages: true` (to show photos)
+8. **Set** `published: true` (to make visible)
+
+---
+
+### 7. Contact Form
 
 ```typescript
 export const contactSection = {
@@ -170,12 +259,16 @@ Open `src/app/globals.css` and find this section (around line 6-20):
 - Add or remove items from lists
 - Change numbers (like phone numbers or years)
 - Copy and paste existing blocks to add more items
+- Make sure property `slug` matches the folder name in `/public/properties/`
+- Use `showImages: false` when photos aren't ready yet
 
 ❌ **DON'T:**
 - Delete commas or brackets `{ } [ ]`
-- Change field names (like `companyName:` or `title:`)
+- Change field names (like `companyName:` or `title:` or `slug:`)
 - Remove the `export` keywords
 - Edit `components.tsx` or `page.tsx` unless you're a developer
+- Change a property's slug after it's published (breaks links)
+- Use spaces or special characters in slugs
 
 ---
 
@@ -208,6 +301,26 @@ name: John Smith
 
 // ✅ Correct
 name: "John Smith"
+```
+
+### Slug Doesn't Match Folder
+```typescript
+// ❌ Wrong - folder and slug don't match!
+// Folder: /public/properties/hayat-tower/
+slug: "hayat-sky-tower-sale"  // System can't find images!
+
+// ✅ Correct - they match!
+// Folder: /public/properties/hayat-sky-tower-sale/
+slug: "hayat-sky-tower-sale"
+```
+
+### Slug with Spaces
+```typescript
+// ❌ Wrong
+slug: "Hayat Sky Tower Sale"  // Has spaces and capitals!
+
+// ✅ Correct
+slug: "hayat-sky-tower-sale"  // Lowercase with hyphens
 ```
 
 ---

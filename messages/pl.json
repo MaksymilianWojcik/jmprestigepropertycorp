@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "services": "Usługi",
+    "properties": "Nieruchomości",
+    "about": "O nas",
+    "testimonials": "Referencje",
+    "contact": "Kontakt",
+    "getStarted": "Rozpocznij"
+  },
+  "hero": {
+    "exploreServices": "Zobacz Usługi",
+    "contactUs": "Skontaktuj się",
+    "viewAllProperties": "Zobacz Wszystkie Nieruchomości"
+  },
+  "services": {
+    "heading": "Nasze Usługi",
+    "subheading": "Kompleksowe rozwiązania w zakresie nieruchomości dostosowane do Twojego sukcesu"
+  },
+  "properties": {
+    "heading": "Polecane Nieruchomości",
+    "subheading": "Odkryj naszą wyselekcjonowaną kolekcję premium nieruchomości na wynajem i sprzedaż",
+    "viewDetails": "Zobacz Szczegóły",
+    "viewAllProperties": "Zobacz Wszystkie Nieruchomości",
+    "bedrooms": "Sypialnia",
+    "bathrooms": "Łazienka",
+    "guests": "Gości",
+    "available": "Dostępne",
+    "booked": "Zarezerwowane",
+    "forSale": "Na Sprzedaż",
+    "perNight": "za noc",
+    "allProperties": "Wszystkie Nieruchomości",
+    "filterByCategory": "Filtruj według Kategorii",
+    "all": "Wszystkie",
+    "shortTermRental": "Wynajem Krótkoterminowy",
+    "forSaleCategory": "Na Sprzedaż",
+    "noProperties": "Nie znaleziono nieruchomości spełniających Twoje kryteria."
+  },
+  "propertyDetail": {
+    "aboutProperty": "O Nieruchomości",
+    "amenities": "Udogodnienia",
+    "propertyFeatures": "Cechy Nieruchomości",
+    "contactToBook": "Skontaktuj się aby Zarezerwować",
+    "requestInformation": "Zapytaj o Informacje",
+    "viewOnAirbnb": "Zobacz na Airbnb",
+    "viewOnBooking": "Zobacz na Booking.com",
+    "back": "Wróć"
+  },
+  "about": {
+    "heading": "Dlaczego Wybrać J&M Prestige"
+  },
+  "testimonials": {
+    "heading": "Referencje Klientów",
+    "subheading": "Posłuchaj naszych zadowolonych klientów o ich doświadczeniach z J&M Prestige"
+  },
+  "contact": {
+    "heading": "Skontaktuj się",
+    "subheading": "Gotowy aby rozpocząć swoją przygodę z nieruchomościami? Skontaktuj się z naszym zespołem ekspertów.",
+    "email": "Email",
+    "phone": "Telefon / WhatsApp",
+    "office": "Biuro",
+    "followUs": "Śledź Nas",
+    "form": {
+      "name": "Imię i Nazwisko",
+      "email": "Email",
+      "phone": "Numer Telefonu",
+      "message": "Wiadomość",
+      "submit": "Wyślij Wiadomość",
+      "sending": "Wysyłanie...",
+      "namePlaceholder": "Twoje imię i nazwisko",
+      "emailPlaceholder": "twoj@email.com",
+      "phonePlaceholder": "+63 XXX XXX XXXX lub +48 XXX XXX XXX",
+      "messagePlaceholder": "Powiedz nam o swoich potrzebach dotyczących nieruchomości...",
+      "successMessage": "Dziękujemy! Twoja wiadomość została pomyślnie wysłana. Wkrótce się z Tobą skontaktujemy.",
+      "errorMessage": "Ups! Wystąpił problem z wysłaniem Twojej wiadomości. Spróbuj ponownie lub napisz do nas bezpośrednio."
+    }
+  },
+  "footer": {
+    "allRightsReserved": "Wszelkie prawa zastrzeżone",
+    "followUs": "Śledź Nas"
+  }
+}

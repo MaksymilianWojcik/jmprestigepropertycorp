@@ -3,7 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { siteInfo, FALLBACK_IMAGE } from "./content";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 // Image Carousel Component
 interface ImageCarouselProps {
@@ -27,13 +30,17 @@ export function ImageCarousel({
 }: ImageCarouselProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [validImages, setValidImages] = useState<string[]>(images);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check if current image is the fallback
+  const isShowingFallback = validImages[currentImageIndex] === FALLBACK_IMAGE;
 
   // If images prop changes, reset validImages
   useEffect(() => {
     setValidImages(images.length > 0 ? images : [FALLBACK_IMAGE]);
     setCurrentImageIndex(0);
-    setIsLoading(false);
+    // Don't show loading for fallback image
+    setIsLoading(images.length > 0 && images[0] !== FALLBACK_IMAGE);
   }, [images]);
 
   // Reset current index if it's out of bounds
@@ -42,6 +49,13 @@ export function ImageCarousel({
       setCurrentImageIndex(0);
     }
   }, [validImages, currentImageIndex]);
+
+  // Show loading when image changes (but not for fallback)
+  useEffect(() => {
+    const currentImage = validImages[currentImageIndex];
+    // Only show loading if not showing fallback
+    setIsLoading(currentImage !== FALLBACK_IMAGE);
+  }, [currentImageIndex, validImages]);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % validImages.length);
@@ -54,6 +68,7 @@ export function ImageCarousel({
   const buttonSizeClass = buttonSize === 'lg' ? 'w-12 h-12 text-2xl' : 'w-10 h-10 text-xl';
 
   const handleImageError = () => {
+    setIsLoading(false);
     // If current image fails to load, remove it and use fallback if no valid images remain
     const currentImage = validImages[currentImageIndex];
     const newValidImages = validImages.filter(img => img !== currentImage);
@@ -71,17 +86,32 @@ export function ImageCarousel({
     }
   };
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
       <div className={className}>
+        {/* Loading Spinner - Only show if loading real images, not fallback */}
+        {isLoading && !isShowingFallback && (
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/50 backdrop-blur-sm z-10">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 border-4 border-[#D4AF37]/30 border-t-[#D4AF37] rounded-full animate-spin"></div>
+              <span className="text-[#D4AF37] text-sm">Loading...</span>
+            </div>
+          </div>
+        )}
+        
         <Image
           src={validImages[currentImageIndex]}
           alt={`${altPrefix} - Image ${currentImageIndex + 1}`}
           fill
-          className={imageClassName}
+          className={`${imageClassName} transition-opacity duration-300 ${isLoading && !isShowingFallback ? 'opacity-0' : 'opacity-100'}`}
           quality={95}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           priority
+          onLoad={handleImageLoad}
           onError={handleImageError}
         />
         
@@ -338,6 +368,40 @@ export function PropertyCard({
   );
 }
 
+// Navigation Bar Component (used on property pages)
+export function NavigationBar() {
+  const router = useRouter();
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20 py-2">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => router.back()}
+              className="group flex items-center gap-2 px-4 py-2.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-sm text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] transition-all duration-300 cursor-pointer"
+              aria-label="Go back"
+            >
+              <span className="text-lg font-bold group-hover:-translate-x-1 transition-transform duration-300">←</span>
+              <span className="text-sm font-semibold">Back</span>
+            </button>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="J&M Prestige Property Corp"
+                width={115}
+                height={115}
+                className="object-contain"
+                priority
+              />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 // Simple Footer Component (used on property pages)
 export function SimpleFooter() {
   return (
@@ -352,6 +416,41 @@ export function SimpleFooter() {
             className="object-contain"
           />
         </Link>
+        <div className="flex justify-center gap-4 mb-6">
+          <a 
+            href={siteInfo.socialMedia.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+            aria-label="Facebook"
+          >
+            <FaFacebook size={20} />
+          </a>
+          <a 
+            href={siteInfo.socialMedia.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+            aria-label="Instagram"
+          >
+            <FaInstagram size={20} />
+          </a>
+          <a 
+            href={siteInfo.socialMedia.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all"
+            aria-label="TikTok"
+          >
+            <FaTiktok size={20} />
+          </a>
+        </div>
+        
+        {/* Language Switcher */}
+        <div className="flex justify-center mb-6">
+          <LanguageSwitcher />
+        </div>
+        
         <p className="text-gray-500 text-sm">
           © {siteInfo.foundedYear} {siteInfo.companyName} {siteInfo.companySubtitle}. All rights reserved.
         </p>

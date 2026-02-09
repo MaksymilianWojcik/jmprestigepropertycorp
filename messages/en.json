@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "services": "Services",
+    "properties": "Properties",
+    "about": "About",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "exploreServices": "Explore Services",
+    "contactUs": "Contact Us",
+    "viewAllProperties": "View All Properties"
+  },
+  "services": {
+    "heading": "Our Services",
+    "subheading": "Comprehensive real estate solutions tailored to your success"
+  },
+  "properties": {
+    "heading": "Featured Properties",
+    "subheading": "Discover our handpicked selection of premium properties for rent and sale",
+    "viewDetails": "View Details",
+    "viewAllProperties": "View All Properties",
+    "bedrooms": "Bed",
+    "bathrooms": "Bath",
+    "guests": "Guests",
+    "available": "Available",
+    "booked": "Booked",
+    "forSale": "For Sale",
+    "perNight": "per night",
+    "allProperties": "All Properties",
+    "filterByCategory": "Filter by Category",
+    "all": "All",
+    "shortTermRental": "Short-Term Rental",
+    "forSaleCategory": "For Sale",
+    "noProperties": "No properties found matching your criteria."
+  },
+  "propertyDetail": {
+    "aboutProperty": "About This Property",
+    "amenities": "Amenities",
+    "propertyFeatures": "Property Features",
+    "contactToBook": "Contact to Book",
+    "requestInformation": "Request Information",
+    "viewOnAirbnb": "View on Airbnb",
+    "viewOnBooking": "View on Booking.com",
+    "back": "Back"
+  },
+  "about": {
+    "heading": "Why Choose J&M Prestige"
+  },
+  "testimonials": {
+    "heading": "Client Testimonials",
+    "subheading": "Hear from our satisfied clients about their experience with J&M Prestige"
+  },
+  "contact": {
+    "heading": "Let's Connect",
+    "subheading": "Ready to elevate your real estate journey? Get in touch with our team of experts.",
+    "email": "Email",
+    "phone": "Phone / WhatsApp",
+    "office": "Office",
+    "followUs": "Follow Us",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "phonePlaceholder": "+63 XXX XXX XXXX or +48 XXX XXX XXX",
+      "messagePlaceholder": "Tell us about your real estate needs...",
+      "successMessage": "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+      "errorMessage": "Oops! There was a problem sending your message. Please try again or email us directly."
+    }
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved",
+    "followUs": "Follow Us"
+  }
+}

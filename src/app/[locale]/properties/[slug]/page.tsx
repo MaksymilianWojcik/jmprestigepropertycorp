@@ -1,15 +1,13 @@
 'use client';
 
-import Image from "next/image";
-import Link from "next/link";
 import { use } from "react";
-import { useRouter } from "next/navigation";
-import { properties, siteInfo, getPropertyImages } from "../../content";
+import { useTranslations } from 'next-intl';
+import { properties, siteInfo, getPropertyImages } from "../../../content";
 import { notFound } from "next/navigation";
-import { ImageCarousel, SimpleFooter } from "../../components";
+import { ImageCarousel, NavigationBar, SimpleFooter } from "../../../components";
 
 export default function PropertyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const router = useRouter();
+  const t = useTranslations();
   const resolvedParams = use(params);
   const property = properties.find((p) => p.slug === resolvedParams.slug);
 
@@ -20,32 +18,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
   return (
     <div className="min-h-screen bg-black text-white pt-24">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#D4AF37]/20 py-2">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-6">
-              <button
-                onClick={() => router.back()}
-                className="flex items-center gap-2 px-4 py-2 text-[#D4AF37] hover:text-[#F4E4B0] transition-colors cursor-pointer"
-                aria-label="Go back"
-              >
-                <span className="text-xl">←</span>
-                <span className="hidden sm:inline text-sm font-medium">Back</span>
-              </button>
-              <Link href="/" className="flex items-center">
-                <Image
-                  src="/logo.png"
-                  alt="J&M Prestige Property Corp"
-                  width={115}
-                  height={115}
-                  className="object-contain"
-                  priority
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <NavigationBar />
 
       {/* Property Detail */}
       <section className="py-12 px-6">
@@ -81,14 +54,14 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4 text-[#D4AF37]">About This Property</h2>
+                <h2 className="text-2xl font-bold mb-4 text-[#D4AF37]">{t('propertyDetail.aboutProperty')}</h2>
                 <p className="text-gray-300 leading-relaxed text-lg">
                   {property.longDescription}
                 </p>
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-6 text-[#D4AF37]">Amenities</h2>
+                <h2 className="text-2xl font-bold mb-6 text-[#D4AF37]">{t('propertyDetail.amenities')}</h2>
                 <div className="space-y-6">
                   {property.amenities.map((category, categoryIndex) => (
                     <div key={categoryIndex}>
@@ -140,11 +113,15 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                       <button
                         onClick={() => {
                           sessionStorage.setItem('scrollToContact', 'true');
+                          sessionStorage.setItem('propertyInquiry', JSON.stringify({
+                            propertyName: property.name,
+                            type: 'booking'
+                          }));
                           window.location.href = '/';
                         }}
                         className="block w-full text-center px-6 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all cursor-pointer"
                       >
-                        Contact to Book
+                        {t('propertyDetail.contactToBook')}
                       </button>
                       
                       {property.airbnbLink && property.airbnbLink !== "#" && property.airbnbLink !== "" && (
@@ -154,7 +131,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                           rel="noopener noreferrer"
                           className="block w-full text-center px-6 py-3 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all"
                         >
-                          View on Airbnb
+                          {t('propertyDetail.viewOnAirbnb')}
                         </a>
                       )}
                       
@@ -165,7 +142,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                           rel="noopener noreferrer"
                           className="block w-full text-center px-6 py-3 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-sm hover:bg-[#D4AF37] hover:text-black transition-all"
                         >
-                          View on Booking.com
+                          {t('propertyDetail.viewOnBooking')}
                         </a>
                       )}
                     </>
@@ -173,17 +150,21 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                     <button
                       onClick={() => {
                         sessionStorage.setItem('scrollToContact', 'true');
+                        sessionStorage.setItem('propertyInquiry', JSON.stringify({
+                          propertyName: property.name,
+                          type: 'information'
+                        }));
                         window.location.href = '/';
                       }}
                       className="block w-full text-center px-6 py-4 bg-[#D4AF37] text-black font-semibold rounded-sm hover:bg-[#F4E4B0] transition-all cursor-pointer"
                     >
-                      Request Information
+                      {t('propertyDetail.requestInformation')}
                     </button>
                   )}
                 </div>
 
                 <div className="border-t border-[#D4AF37]/20 pt-6">
-                  <h3 className="font-semibold mb-3 text-[#D4AF37]">Property Features</h3>
+                  <h3 className="font-semibold mb-3 text-[#D4AF37]">{t('propertyDetail.propertyFeatures')}</h3>
                   <div className="flex flex-wrap gap-2">
                     {property.features.map((feature, index) => (
                       <span

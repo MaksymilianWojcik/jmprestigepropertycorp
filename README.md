@@ -61,6 +61,7 @@ export const services = [
 export const properties = [
   {
     id: 1,
+    slug: "luxury-apartment-szczecin",  // ⚠️ CRITICAL: Used for URLs AND image paths
     name: "Luxury Apartment in Szczecin",
     location: "Szczecin, Poland",
     bedrooms: 2,
@@ -68,19 +69,77 @@ export const properties = [
     price: "€80",
     priceUnit: "per night",
     features: ["WiFi", "Parking", ...],
-    image: "/property-image.jpg",  // Add images to /public/
+    images: ["image-1.jpg", "image-2.jpg"],  // Auto-paths to /properties/{slug}/
+    showImages: true,  // Set to false to show logo instead
     available: true,
+    published: true,
+    featured: false,
   },
   // Add more properties here
 ];
 ```
 
+**⚠️ IMPORTANT: Understanding the `slug` and `cloudinaryFolder` Fields**
+
+The `slug` and `cloudinaryFolder` are two different but important fields:
+
+**1. `slug`** - Used for URLs and property identification
+   - Creates the property detail page URL
+   - Example: `slug: "luxury-apartment-szczecin"` → `/properties/luxury-apartment-szczecin`
+   - Must be unique (no two properties can have the same slug)
+   - URL-friendly format (lowercase, use hyphens `-` not spaces)
+
+**2. `cloudinaryFolder`** - Used for Cloudinary image hosting
+   - Specifies which Cloudinary folder contains this property's images
+   - Example: `cloudinaryFolder: "optb15n"` → Images load from Cloudinary folder "optb15n"
+   - Can be empty (`""`) if not using Cloudinary yet
+   - Must exactly match the folder name in your Cloudinary Media Library
+
+**Slug vs CloudinaryFolder:**
+```typescript
+{
+  slug: "onepacific-tb-15n",        // URL: /properties/onepacific-tb-15n
+  cloudinaryFolder: "optb15n",       // Images: cloudinary.com/.../optb15n/
+  images: ["op_tb15n1.jpeg"],        // Filename in Cloudinary folder
+}
+```
+
+**How Images Work with Cloudinary:**
+
+```typescript
+// In content.ts
+{
+  cloudinaryFolder: "optb15n",         // Cloudinary folder name
+  images: ["op_tb15n1.jpeg", "op_tb15n2.jpeg"],  // Just filenames!
+  showImages: true,                    // false = show logo, true = show images
+}
+
+// Automatically resolves to:
+// https://res.cloudinary.com/du85wguro/image/upload/optb15n/op_tb15n1.jpeg
+```
+
+👉 **See [CLOUDINARY_GUIDE.md](./CLOUDINARY_GUIDE.md) for complete image hosting guide**
+
 **To add a new property:**
-1. Add property images to `/public/` folder
-2. Copy an existing property object in `content.ts`
-3. Update all fields (id, slug, name, category, price, features, etc.)
-4. Set `category` to either `"short-term-rental"` or `"for-sale"`
-5. Add image paths to `images: ["/image1.jpg", "/image2.jpg", ...]`
+1. **Choose a slug** (URL-friendly name, e.g., `"modern-studio-cebu"`)
+   - ⚠️ CRITICAL: The slug creates the property URL
+2. **Upload images to Cloudinary** (see [CLOUDINARY_GUIDE.md](./CLOUDINARY_GUIDE.md))
+   - Create a folder in Cloudinary Media Library
+   - Upload property images to that folder
+   - Note the folder name (e.g., `"modern-studio"`)
+3. Copy an existing property object in `content.ts`
+4. Update all fields:
+   - `id` - Unique number
+   - `slug` - URL-friendly identifier
+   - `cloudinaryFolder` - Cloudinary folder name (or `""` if not using Cloudinary)
+   - `name` - Display name
+   - `category` - Either `"short-term-rental"` or `"for-sale"`
+   - `price` and `priceUnit`
+   - `features`, `amenities`, etc.
+5. Add image filenames to `images: ["1.jpg", "2.jpg", ...]`
+   - Only filenames needed, URLs are auto-generated from cloudinaryFolder
+6. Set `showImages: true` when ready to display images
+7. Set `published: true` to make visible on the website
 
 **Property Categories:**
 - `short-term-rental` - Properties available for short-term stays (shown in Featured Properties)
@@ -112,21 +171,48 @@ The properties page (`/properties`) includes a filter system:
 │       ├── properties/
 │       │   ├── page.tsx      # Properties listing with filters
 │       │   └── [slug]/
-│       │       └── page.tsx  # Individual property detail pages
+│       │       └── page.tsx  # Individual property detail pages (uses slug!)
 │       ├── layout.tsx        # App layout & metadata
 │       └── globals.css       # Global styles & theme colors
 ├── public/
-│   ├── properties/           # Property images organized by slug
-│   │   ├── {property-slug}/
+│   ├── properties/           # ⚠️ Property images MUST be organized by slug
+│   │   ├── {property-slug}/  # ← Folder name MUST match property's slug field!
 │   │   │   ├── image-1.jpg
 │   │   │   └── image-2.jpg
 │   │   └── ...
-│   ├── logo.png             # Company logo (gold)
+│   ├── logo.png             # Company logo (gold) - used as fallback
 │   ├── logoblack.png        # Company logo (black)
 │   └── jmbackground.jpg     # Hero section background
 ├── CONTENT_GUIDE.md         # Guide for non-technical content updates
 └── README.md                # This file (technical documentation)
 ```
+
+### 🔗 How the Slug and Cloudinary Connect
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ content.ts                                                      │
+├─────────────────────────────────────────────────────────────────┤
+│ {                                                               │
+│   slug: "onepacific-tb-15n",     ← Creates property URL        │
+│   cloudinaryFolder: "optb15n",   ← Cloudinary folder name      │
+│   images: ["op_tb15n1.jpeg"]     ← Image filename              │
+│ }                                                               │
+└────────────┬──────────────────────┬──────────────────────────────┘
+             │                      │
+             ├─ Creates URL         ├─ Loads from Cloudinary
+             │                      │
+             ▼                      ▼
+  /properties/onepacific-tb-15n    https://res.cloudinary.com/
+       (Property page URL)          du85wguro/image/upload/
+                                    optb15n/op_tb15n1.jpeg
+                                    (Cloudinary CDN URL)
+```
+
+**Key Points:** 
+- `slug` creates the property page URL
+- `cloudinaryFolder` determines where images are hosted
+- These are independent - they don't need to match!
 
 ## 🎨 Features
 
@@ -252,11 +338,27 @@ amenities: [
 - Add category only if you have items for it
 
 #### Add a Short-Term Rental Property
+
+**Step-by-step process:**
+
+1. **Choose a URL-friendly slug** (this is critical!)
+   - Example: `"modern-loft-downtown"`
+   - Must be lowercase with hyphens (no spaces or special characters)
+   - This slug determines BOTH the URL AND the image folder path
+
+2. **Create the image folder** at `/public/properties/{slug}/`
+   - Example: `/public/properties/modern-loft-downtown/`
+
+3. **Add images** to that folder
+   - Example: `image-1.jpg`, `image-2.jpg`, etc.
+
+4. **Add property to content.ts:**
+
 ```typescript
 // In content.ts - properties array
 {
   id: 3,
-  slug: "modern-loft-downtown",          // URL-friendly name
+  slug: "modern-loft-downtown",          // ⚠️ Must match folder name above!
   name: "Modern Loft Downtown",
   location: "Szczecin, Poland",
   category: "short-term-rental",        // Important: for filtering
@@ -288,11 +390,20 @@ amenities: [
       ]
     }
   ],
-  images: ["/loft1.jpg", "/loft2.jpg"],  // Multiple images
+  images: ["image-1.jpg", "image-2.jpg"],  // Only filenames - paths auto-generated!
+  showImages: true,                        // false = show logo, true = show images
   available: true,
-  airbnbLink: "https://airbnb.com/...",  // Optional
+  published: true,                         // false = hidden, true = visible
+  featured: false,                         // true = show on homepage
+  airbnbLink: "https://airbnb.com/...",   // Optional
   bookingLink: "https://booking.com/...", // Optional
 }
+```
+
+**How the slug connects everything:**
+- URL: `/properties/modern-loft-downtown` (from slug)
+- Images: `/public/properties/modern-loft-downtown/image-1.jpg` (from slug + filename)
+- Navigation: Next.js uses slug to find and display the right property
 ```
 
 #### Add a Property Available for Both Sale & Rent
@@ -816,10 +927,27 @@ src/app/
 ## 🐛 Troubleshooting
 
 ### Images Not Displaying
-1. Check image exists in `/public/` folder
-2. Verify path starts with `/` (e.g., `/logo.png`)
-3. Image names are case-sensitive
-4. Supported formats: JPG, PNG, WebP, GIF
+1. **Check slug matches folder name** ⚠️ Most common issue!
+   - Property slug in `content.ts`: `"hayat-sky-tower-sale"`
+   - Folder name: `/public/properties/hayat-sky-tower-sale/` (must match exactly!)
+2. Check image files exist in `/public/properties/{slug}/` folder
+3. Verify image filenames in `content.ts` match actual filenames
+4. Check `showImages: true` (not `false`)
+5. Image names are case-sensitive (`Image-1.jpg` ≠ `image-1.jpg`)
+6. Supported formats: JPG, PNG, WebP, GIF
+
+### Property Page Shows "404 Not Found"
+1. **Check slug format** - must be lowercase with hyphens, no spaces
+2. Verify property exists in `properties` array in `content.ts`
+3. Check slug is unique (no duplicates)
+4. Restart dev server after adding new properties
+
+### Property Showing Logo Instead of Images
+1. Check `showImages: true` (not `false`)
+2. Verify folder name matches slug exactly
+3. Check images exist in correct folder: `/public/properties/{slug}/`
+4. Verify image filenames in `content.ts` match actual files
+5. Check browser console for image loading errors
 
 ### Links Not Working
 1. Internal sections must start with `#` (e.g., `#contact`)

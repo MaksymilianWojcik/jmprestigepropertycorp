@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "services": "Mga Serbisyo",
+    "properties": "Mga Ari-arian",
+    "about": "Tungkol sa Amin",
+    "testimonials": "Mga Testimonya",
+    "contact": "Makipag-ugnayan",
+    "getStarted": "Magsimula"
+  },
+  "hero": {
+    "exploreServices": "Tuklasin ang Serbisyo",
+    "contactUs": "Makipag-ugnayan sa Amin",
+    "viewAllProperties": "Tingnan ang Lahat ng Ari-arian"
+  },
+  "services": {
+    "heading": "Aming Mga Serbisyo",
+    "subheading": "Komprehensibong solusyon sa real estate na inilaan para sa iyong tagumpay"
+  },
+  "properties": {
+    "heading": "Mga Pangunahing Ari-arian",
+    "subheading": "Tuklasin ang aming piniling koleksyon ng premium na mga ari-arian para sa renta at benta",
+    "viewDetails": "Tingnan ang Detalye",
+    "viewAllProperties": "Tingnan ang Lahat ng Ari-arian",
+    "bedrooms": "Silid-tulugan",
+    "bathrooms": "Banyo",
+    "guests": "Bisita",
+    "available": "Available",
+    "booked": "Nakareserba na",
+    "forSale": "Para sa Pagbebenta",
+    "perNight": "bawat gabi",
+    "allProperties": "Lahat ng Ari-arian",
+    "filterByCategory": "I-filter ayon sa Kategorya",
+    "all": "Lahat",
+    "shortTermRental": "Panandaliang Upa",
+    "forSaleCategory": "Para sa Pagbebenta",
+    "noProperties": "Walang nakitang ari-arian na tumutugma sa iyong pamantayan."
+  },
+  "propertyDetail": {
+    "aboutProperty": "Tungkol sa Ari-arian",
+    "amenities": "Mga Pasilidad",
+    "propertyFeatures": "Mga Tampok ng Ari-arian",
+    "contactToBook": "Makipag-ugnayan para Magreserba",
+    "requestInformation": "Humiling ng Impormasyon",
+    "viewOnAirbnb": "Tingnan sa Airbnb",
+    "viewOnBooking": "Tingnan sa Booking.com",
+    "back": "Bumalik"
+  },
+  "about": {
+    "heading": "Bakit Piliin ang J&M Prestige"
+  },
+  "testimonials": {
+    "heading": "Mga Testimonya ng Kliyente",
+    "subheading": "Pakinggan ang aming mga kliyente tungkol sa kanilang karanasan sa J&M Prestige"
+  },
+  "contact": {
+    "heading": "Makipag-ugnayan",
+    "subheading": "Handa ka na ba para sa iyong real estate journey? Makipag-ugnayan sa aming koponan.",
+    "email": "Email",
+    "phone": "Telepono / WhatsApp",
+    "office": "Tanggapan",
+    "followUs": "Sundan Kami",
+    "form": {
+      "name": "Buong Pangalan",
+      "email": "Email",
+      "phone": "Numero ng Telepono",
+      "message": "Mensahe",
+      "submit": "Ipadala ang Mensahe",
+      "sending": "Ipinapadala...",
+      "namePlaceholder": "Ang iyong pangalan",
+      "emailPlaceholder": "iyong@email.com",
+      "phonePlaceholder": "+63 XXX XXX XXXX o +48 XXX XXX XXX",
+      "messagePlaceholder": "Sabihin sa amin ang iyong pangangailangan sa real estate...",
+      "successMessage": "Salamat! Ang iyong mensahe ay natanggap na namin. Makikipag-ugnayan kami sa iyo sa lalong madaling panahon.",
+      "errorMessage": "Paumanhin! May problema sa pagpapadala ng iyong mensahe. Pakisubukan muli o mag-email sa amin nang direkta."
+    }
+  },
+  "footer": {
+    "allRightsReserved": "Lahat ng karapatan ay nakalaan",
+    "followUs": "Sundan Kami"
+  }
+}

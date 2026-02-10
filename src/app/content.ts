@@ -229,7 +229,7 @@ export const properties = [
     available: true,
     published: true, // Set to false to hide from listings
     featured: true, // Set to true to show in homepage Featured section
-    airbnbLink: "#",
+    airbnbLink: "https://www.airbnb.com/rooms/1617983795154763749",
     bookingLink: "#",
   },
   {

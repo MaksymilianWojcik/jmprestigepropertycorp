@@ -31,9 +31,20 @@ export function ImageCarousel({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [validImages, setValidImages] = useState<string[]>(images);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check if current image is the fallback
   const isShowingFallback = validImages[currentImageIndex] === FALLBACK_IMAGE;
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // If images prop changes, reset validImages
   useEffect(() => {
@@ -90,6 +101,88 @@ export function ImageCarousel({
     setIsLoading(false);
   };
 
+  // Handle scroll to update current index on mobile
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const itemWidth = container.offsetWidth;
+    const newIndex = Math.round(scrollLeft / itemWidth);
+    if (newIndex !== currentImageIndex && newIndex >= 0 && newIndex < validImages.length) {
+      setCurrentImageIndex(newIndex);
+    }
+  };
+
+  // Mobile horizontal scroll version
+  if (isMobile && validImages.length > 1) {
+    return (
+      <>
+        <div className={`${className} overflow-hidden`}>
+          <div 
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            onScroll={handleScroll}
+          >
+            {validImages.map((image, index) => (
+              <div key={index} className="flex-shrink-0 w-full h-full snap-center relative">
+                {isLoading && index === 0 && !isShowingFallback && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/50 backdrop-blur-sm z-10">
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-12 h-12 border-4 border-[#D4AF37]/30 border-t-[#D4AF37] rounded-full animate-spin"></div>
+                      <span className="text-[#D4AF37] text-sm">Loading...</span>
+                    </div>
+                  </div>
+                )}
+                <Image
+                  src={image}
+                  alt={`${altPrefix} - Image ${index + 1}`}
+                  fill
+                  className={`${imageClassName}`}
+                  quality={95}
+                  sizes="100vw"
+                  priority={index === 0}
+                  onLoad={index === 0 ? handleImageLoad : undefined}
+                  onError={handleImageError}
+                />
+              </div>
+            ))}
+          </div>
+          
+          {showIndicators && !indicatorsOutside && (
+            <div className={`absolute ${buttonSize === 'lg' ? 'bottom-6' : 'bottom-4'} left-1/2 -translate-x-1/2 flex ${buttonSize === 'lg' ? 'gap-3' : 'gap-2'} z-20`}>
+              {validImages.map((_, index) => (
+                <div
+                  key={index}
+                  className={`${buttonSize === 'lg' ? 'w-3 h-3' : 'w-2 h-2'} rounded-full transition-all ${
+                    index === currentImageIndex
+                      ? `bg-[#D4AF37] ${buttonSize === 'lg' ? 'w-12' : 'w-8'}`
+                      : "bg-white/50"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        
+        {/* External indicators (below image) */}
+        {showIndicators && indicatorsOutside && (
+          <div className="flex justify-center gap-3 mt-4">
+            {validImages.map((_, index) => (
+              <div
+                key={index}
+                className={`${buttonSize === 'lg' ? 'w-3 h-3' : 'w-2 h-2'} rounded-full transition-all ${
+                  index === currentImageIndex
+                    ? `bg-[#D4AF37] ${buttonSize === 'lg' ? 'w-12' : 'w-8'}`
+                    : "bg-[#D4AF37]/30"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </>
+    );
+  }
+
+  // Desktop version with arrows
   return (
     <>
       <div className={className}>
@@ -122,7 +215,7 @@ export function ImageCarousel({
                 e.preventDefault();
                 prevImage();
               }}
-              className={`absolute ${buttonSize === 'lg' ? 'left-4' : 'left-2'} top-1/2 -translate-y-1/2 bg-black/90 text-[#D4AF37] ${buttonSizeClass} rounded-full hover:bg-black transition-all ${buttonSize === 'sm' ? 'opacity-0 group-hover:opacity-100' : ''} flex items-center justify-center font-bold border border-[#D4AF37]/30 cursor-pointer`}
+              className={`absolute ${buttonSize === 'lg' ? 'left-4' : 'left-2'} top-1/2 -translate-y-1/2 bg-black/90 text-[#D4AF37] ${buttonSizeClass} rounded-full hover:bg-black transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center font-bold border border-[#D4AF37]/30 cursor-pointer`}
               aria-label="Previous image"
             >
               ←
@@ -132,7 +225,7 @@ export function ImageCarousel({
                 e.preventDefault();
                 nextImage();
               }}
-              className={`absolute ${buttonSize === 'lg' ? 'right-4' : 'right-2'} top-1/2 -translate-y-1/2 bg-black/90 text-[#D4AF37] ${buttonSizeClass} rounded-full hover:bg-black transition-all ${buttonSize === 'sm' ? 'opacity-0 group-hover:opacity-100' : ''} flex items-center justify-center font-bold border border-[#D4AF37]/30 cursor-pointer`}
+              className={`absolute ${buttonSize === 'lg' ? 'right-4' : 'right-2'} top-1/2 -translate-y-1/2 bg-black/90 text-[#D4AF37] ${buttonSizeClass} rounded-full hover:bg-black transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center font-bold border border-[#D4AF37]/30 cursor-pointer`}
               aria-label="Next image"
             >
               →
